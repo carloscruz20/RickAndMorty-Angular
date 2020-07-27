@@ -4,6 +4,7 @@ import { CharacterService } from '@app/shared/services/character.service';
 import { take, filter } from "rxjs/operators";
 import { DOCUMENT } from "@angular/common";
 import { ActivatedRoute, ParamMap, Router, NavigationEnd } from '@angular/router';
+import { TrackHttpError } from '@app/shared/models/trackHttpError';
 
 type RequestInfo={
   next:string
@@ -73,7 +74,8 @@ export class CharacterListComponent implements OnInit {
       }else{
         this.characters=[];
       }   
-    })
+    },(error:TrackHttpError)=>console.log(error.friendlyMessage)
+    )
   }
 
   @HostListener('window:scroll',[])
